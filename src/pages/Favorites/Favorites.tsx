@@ -16,8 +16,8 @@ function Favorites() {
                 favoritesArray.map(async (favoriteId: string) => {
                     return getDetailMovies(favoriteId)
                      .then((res) => {
-                        if (res && res.data) {
-                            return res.data;
+                        if (res && res) {
+                            return res;
                         }
                      }).catch((err) => {
                             console.log(err)

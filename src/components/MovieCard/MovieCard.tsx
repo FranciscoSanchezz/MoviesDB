@@ -3,34 +3,62 @@ import { IMovieCard } from './types'
 import { IMAGE_SOURCE } from '../../constants/moviesMock'
 import { Pill } from '../Pill';
 import './MovieCard.css'
-import genres from '../../constants/genres.json';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../routes/constants';
 
-interface Genre {
-    id: number;
-    name: string;
-  }
-  
-  const MovieCard: React.FC<IMovieCard> = ({
+const MovieCard: React.FC<IMovieCard> = ({
     title,
     genreId,
     movieId,
     voteAverage,
     posterPath,
-  }) => {
+}) => {
     const navigate = useNavigate();
-    // states
     const poster = IMAGE_SOURCE + posterPath;
-  
     const getGenre = (genreId: number): string => {
-      const genre: Genre | undefined = genres.genres.find(
-        (genre: Genre) => genre.id === genreId
-      );
-      return genre ? genre.name : genreId.toString();
-    };
-  
-  
+        switch (genreId) {
+            case 28:
+                return 'Action';
+            case 12:
+                return 'Adventure';
+            case 16:
+                return 'Animation';
+            case 35:
+                return 'Comedy';
+            case 80:
+                return 'Crime';
+            case 99:
+                return 'Documentary';
+            case 18:
+                return 'Drama';
+            case 10751:
+                return 'Family';
+            case 14:
+                return 'Fantasy';
+            case 36:
+                return 'History';
+            case 27:
+                return 'Horror';
+            case 10402:
+                return 'Music';
+            case 9648:
+                return 'Mystery';
+            case 10749:
+                return 'Romance';
+            case 878:
+                return 'Science Fiction';
+            case 10770:
+                return 'TV Movie';
+            case 53:
+                return 'Thriller';
+            case 10752:
+                return 'War';
+            case 37:
+                return 'Western';
+            default:
+                return 'Unknown';
+        }
+    }
 
     const navigateMovies = (id: number, movieName: string) => {
         navigate(`${ROUTES.SHOW}${id}`, {state: { movieName } })// /show/id

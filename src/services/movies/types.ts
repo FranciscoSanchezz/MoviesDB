@@ -1,4 +1,5 @@
 export interface IMovieResponse {
+    genre_ids: any;
     adult:             boolean;
     backdrop_path:     string;
     genres:            Genre[];
@@ -8,7 +9,7 @@ export interface IMovieResponse {
     overview:          string;
     popularity:        number;
     poster_path:       string;
-    release_date:      Date;
+    release_date:      string;
     title:             string;
     video:             boolean;
     vote_average:      number;

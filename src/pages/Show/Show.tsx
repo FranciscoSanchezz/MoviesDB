@@ -37,8 +37,7 @@ const Show: React.FC = () => {
 
     const removeFavorite = () => {
         const favs = favorites.length > 0 ? JSON.parse(favorites) : [];
-        let newFavorites = [...favs, id];
-        newFavorites.filter((e) => e !== id);
+        const newFavorites = favs.filter((fav: string) => fav !== id);
         setFavorites(JSON.stringify(newFavorites));
         setIsFavorite(false);
         localStorage.setItem('favorites', JSON.stringify(newFavorites));
@@ -110,7 +109,7 @@ const Show: React.FC = () => {
                         <div className='text-xl font-medium mx-4'>
                             <div className='flex h-6'>
                                 <img src={Calendar} alt='calendar'></img>
-                                <div className='mx-1'>{detailmovies?.release_date?.toString()}</div>
+                                <div className='mx-1'>{detailmovies?.release_date}</div>
                             </div>
                         </div>
                         <div className='text-xl font-medium mx-4'>
