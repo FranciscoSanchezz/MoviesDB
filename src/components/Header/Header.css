@@ -1,0 +1,25 @@
+.header-nav{
+    @apply font-semibold m-0 float-right text-sm;
+}
+
+.menubar{
+    @apply inline-flex;
+}
+
+.menunav{
+    @apply list-none m-3;
+}
+
+.menunav > li{
+    @apply float-left;
+}
+
+.menunav li{
+    @apply relative m-0;
+}
+
+.header-wrapper{
+    @apply m-0 h-24 bg-white;
+}
+
+

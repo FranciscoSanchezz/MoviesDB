@@ -1,0 +1,4 @@
+.show-label {
+    @apply bg-red-500 text-white p-2 text-xs font-semibold mt-0 mr-0 mb-2 ml-0 transition-all duration-300 rounded-lg table;
+  }
+  
