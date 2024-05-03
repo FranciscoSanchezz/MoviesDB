@@ -22,6 +22,7 @@ const Header: React.FC = () => {
         <div className={linkClass(ROUTES.POPULAR)} onClick={() => handleSetActive(ROUTES.POPULAR)}><Link to={ROUTES.POPULAR}>POPULAR</Link></div>
         <div className={linkClass(ROUTES.TOPRATED)} onClick={() => handleSetActive(ROUTES.TOPRATED)}><Link to={ROUTES.TOPRATED}>TOP RATED</Link></div>
         <div className={linkClass(ROUTES.NOWPLAYING)} onClick={() => handleSetActive(ROUTES.NOWPLAYING)}><Link to={ROUTES.NOWPLAYING}>NOW PLAYING</Link></div>
+        <div className={linkClass(ROUTES.FAVORITES)} onClick={() => handleSetActive(ROUTES.FAVORITES)}><Link to={ROUTES.FAVORITES}>FAVORITES</Link></div>
       </div>
     </div>
   );

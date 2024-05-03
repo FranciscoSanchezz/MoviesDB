@@ -6,6 +6,7 @@ import { MovieCard } from '../../components/MovieCard';
 import { Pill } from '../../components/Pill';
 import './Show.css'
 import {Groups, Time, Calendar, Star, Graph} from '../../assets';
+import { getRecommendedMovies } from '../../services/movies/getRecommendedMovies';
 
 
 
@@ -19,9 +20,29 @@ const Show: React.FC = () => {
     const [loadingRecommendations, setLoadingRecommendations] = useState<boolean>(false);
     const [errorRecommendations, setErrorRecommendations] = useState<boolean>(false);
 
+    const [isFavorite, setIsFavorite] = useState<boolean>(false);
+    const [favorites, setFavorites] = useState<string>("");
+
     const { id } = useParams();
     const location = useLocation();
     const navigate = useNavigate();
+
+    const addFavorite = () => {
+        const favs = favorites.length > 0 ? JSON.parse(favorites) : [];
+        const newFavorites = [...favs, id];
+        setFavorites(JSON.stringify(newFavorites));
+        setIsFavorite(true);
+        localStorage.setItem('favorites', JSON.stringify(newFavorites));
+    }
+
+    const removeFavorite = () => {
+        const favs = favorites.length > 0 ? JSON.parse(favorites) : [];
+        let newFavorites = [...favs, id];
+        newFavorites.filter((e) => e !== id);
+        setFavorites(JSON.stringify(newFavorites));
+        setIsFavorite(false);
+        localStorage.setItem('favorites', JSON.stringify(newFavorites));
+    }
 
     const getDetails = async () => {
         await getDetailMovies(id)
@@ -35,14 +56,18 @@ const Show: React.FC = () => {
     }
 
     useEffect(() => {
+        const favs = localStorage.getItem('favorites')|| "";
+        setFavorites(favs);
+        if( favs.includes(String(id))) {
+            setIsFavorite(true);
+        }
         setDetailLoading(true);
         getDetails();
     }, []);
 
     const getRecommendations = async () => {
-        await getDetailMovies(id)
+        await getRecommendedMovies(id)
         .then((res) => {
-            console.log(res.results);
             setRecommendations(res.results);
         })
         .catch((err) => {
@@ -116,9 +141,20 @@ const Show: React.FC = () => {
                         </div>
                         <div className='grid mx-20'>
                             <div className='text-lg font-semibold'>Favorite</div>
-                            <button className="bg-blue-700 hover:bg-blue-900 border-2 border-blue-300 text-white font-bold p-2 h-fit rounded-md">
-                            ♥ Add to favorites
-                            </button>
+                            {isFavorite ? (
+                                <div>
+                             <button className=" bg-blue-500 hover:bg-blue-900 border-2 border-blue-300 text-white font-bold p-2 h-fit rounded-md" onClick={removeFavorite}>
+                             remove from favorites
+                            </button>                                   
+                                </div>
+                            ):(
+                                <div>
+                                <button className="bg-red-500 hover:bg-blue-900 border-2 border-blue-300 text-white font-bold p-2 h-fit rounded-md" onClick={addFavorite}>
+                                ♥ Add to favorites
+                                </button>
+                                </div>
+                            )}
+
                         </div>
                     </div>
                     <button className=" bg-indigo-700 hover:bg-indigo-900 border-2 border-indigo-200 text-white font-bold p-2 h-fit rounded-md mx-4 mb-5" onClick={goBack}>⏎ Ir atrás</button>
