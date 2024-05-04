@@ -40,11 +40,11 @@ function Favorites() {
     <div>
         {!loading ?(
             <div>
-                <h2>My Favorites</h2>
+                <h2 className='my-6 text-4xl font-semibold text-gray-800 mt-8 ml-8 uppercase'>My Favorites</h2>
                 {favorites && favorites.length > 0 ? (
                     <div>
                         {shows && shows.length > 0 ? (
-                            <div>{shows.map((show: IMovieDetail) =>(
+                            <div className='p-4'>{shows.map((show: IMovieDetail) =>(
                                 <MovieCard
                                     key={show.id}
                                     title={show.title}
@@ -55,13 +55,13 @@ function Favorites() {
                                 />
                             ))}</div>
                         ) : (
-                            <div>Error fetching movies</div>
+                            <div className='my-6 text-4xl font-semibold text-red-600 mt-8 ml-8 uppercase'>Error fetching movies</div>
                         )
                     }
                     </div>
                 ) : (
                     <div>
-                        <h3>No Favorites</h3>
+                        <h3 className='my-6 text-4xl font-semibold text-gray-800 mt-8 ml-8 uppercase'>No Favorites</h3>
                     </div>
                 )
             }

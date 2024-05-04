@@ -62,7 +62,7 @@ const Show: React.FC = () => {
         }
         setDetailLoading(true);
         getDetails();
-    }, []);
+    }, [id]);
 
     const getRecommendations = async () => {
         await getRecommendedMovies(id)
@@ -77,7 +77,7 @@ const Show: React.FC = () => {
     useEffect(() => {
         setLoadingRecommendations(true);
         getRecommendations();
-    }, []);
+    }, [id]);
 
     const goBack = () => {
         navigate(-1);
@@ -95,31 +95,31 @@ const Show: React.FC = () => {
                     <div className='text-5xl text-gray-800 font-semibold mx-4 mt-16'>{location.state.title}</div>
                     <div className='flex h-0'>
                         <div className='text-md font-medium mx-4'>
-                            <div className='flex h-6'>
+                            <div className='flex h-6 space-x-3'>
                                 <img src={Groups} alt='people'></img>
                                 <div className='mx-1 text-xl'>{detailmovies?.adult === true && '18+'}{detailmovies?.adult === false && '18-'}</div>
                             </div>
                         </div>
                         <div className='text-xl font-medium mx-4'>
-                            <div className='flex h-6'>
+                            <div className='flex h-6 space-x-3'>
                                 <img src={Time} alt='time'></img>
                                 <div className='text-md font-medium'>{detailmovies?.runtime} min.</div>
                             </div>
                         </div>
                         <div className='text-xl font-medium mx-4'>
-                            <div className='flex h-6'>
+                            <div className='flex h-6 space-x-3' >
                                 <img src={Calendar} alt='calendar'></img>
                                 <div className='mx-1'>{detailmovies?.release_date}</div>
                             </div>
                         </div>
                         <div className='text-xl font-medium mx-4'>
-                            <div className='flex h-6'>
+                            <div className='flex h-6 space-x-3'>
                                 <img src={Star} alt='star'></img>
                                 <div className='text-md font-medium'>{detailmovies?.vote_average}</div>
                             </div>
                         </div>
                         <div className='text-xl font-medium mx-4'>
-                            <div className='flex h-6'>
+                            <div className='flex h-6 space-x-3'>
                                 <img src={Graph} alt='graph'></img>
                                 <div className='text-md font-medium'>{detailmovies?.vote_count}</div>
                             </div>
@@ -142,13 +142,13 @@ const Show: React.FC = () => {
                             <div className='text-lg font-semibold'>Favorite</div>
                             {isFavorite ? (
                                 <div>
-                             <button className=" bg-blue-500 hover:bg-blue-900 border-2 border-blue-300 text-white font-bold p-2 h-fit rounded-md" onClick={removeFavorite}>
-                             remove from favorites
+                             <button className=" bg-red-700 hover:bg-red-800 border-2 border-blue-300 text-white font-bold p-2 h-fit rounded-md" onClick={removeFavorite}>
+                             💔 remove from favorites
                             </button>                                   
                                 </div>
                             ):(
                                 <div>
-                                <button className="bg-red-500 hover:bg-blue-900 border-2 border-blue-300 text-white font-bold p-2 h-fit rounded-md" onClick={addFavorite}>
+                                <button className="bg-blue-500 hover:bg-blue-900 border-2 border-blue-300 text-white font-bold p-2 h-fit rounded-md" onClick={addFavorite}>
                                 ♥ Add to favorites
                                 </button>
                                 </div>
